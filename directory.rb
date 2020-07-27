@@ -8,7 +8,13 @@ def input_students
     # while the name is not empty, repeat this code
     while !name.empty? do
       # add the student hash to the array
-      students << {name: name, cohort: :november}
+      puts "Please enter their hobbies?"
+      hobbies = gets.chomp
+      puts "Please enter their country of birth"
+      birth_country = gets.chomp
+      puts "Please enter their height"
+      height = gets.chomp
+      students << {name: name, cohort: :november, hobbies: hobbies, country: birth_country, height: height}
       puts "Now we have #{students.count} students"
       # get another name from the user
       name = gets.chomp
@@ -25,7 +31,7 @@ def input_students
   def print(students)
     count = 0
     while count < students.count
-        puts "#{count+1}. #{students[count][:name]} (#{students[count][:cohort]} cohort)"
+        puts "#{count+1}. #{students[count][:name]} (#{students[count][:cohort]} cohort). Their country of birth is: #{students[count][:country]} and their hobbies include: #{students[count][:hobbies]}. They are #{students[count][:height]} tall."
         count += 1
     end
   end
@@ -33,7 +39,7 @@ def input_students
   def print_specific_letter(students, letter='a')
     students.each_with_index do |student,index|
         if student[:name][0].downcase == letter.downcase
-            puts "#{index+1}. #{student[:name]} (#{student[:cohort]} cohort)"
+            puts "#{index+1}. #{student[:name]} (#{student[:cohort]} cohort). Their country of birth is: #{student[:country]} and their hobbies include: #{student[:hobbies]}. They are #{student[:height]} tall."
         end
     end 
   end
@@ -41,7 +47,7 @@ def input_students
   def print_short_names(students)
     students.each_with_index do |student,index|
         if student[:name].length < 12
-            puts "#{index+1}. #{student[:name]} (#{student[:cohort]} cohort)"
+            puts "#{index+1}. #{student[:name]} (#{student[:cohort]} cohort). Their country of birth is: #{student[:country]} and their hobbies include: #{student[:hobbies]}. They are #{student[:height]} tall."
         end
     end 
   end
