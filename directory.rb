@@ -35,6 +35,14 @@ def input_students
         end
     end 
   end
+
+  def print_short_names(students)
+    students.each_with_index do |student,index|
+        if student[:name].length < 12
+            puts "#{index+1}. #{student[:name]} (#{student[:cohort]} cohort)"
+        end
+    end 
+  end
  
   def print_footer(students)
     puts "Overall, we have #{students.count} great students"
@@ -44,4 +52,5 @@ def input_students
   print_header
   print(students)
   print_specific_letter(students)
+  print_short_names(students)
   print_footer(students)
