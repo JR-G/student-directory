@@ -11,15 +11,7 @@ def input_students
 			puts "Please enter their cohort:"
 			cohort = STDIN.gets.strip
 			# get the user to confirm the name and cohort values
-			puts "is name: '#{name}' & cohort: '#{cohort}' correct? (y/n)"
-			confirm = STDIN.gets.strip
-			if confirm == "n"
-				puts "Please re-enter their name:"
-				name = STDIN.gets.strip
-				puts "Please re-enter their cohort:"
-				cohort = STDIN.gets.strip
-			end
-			@students << {name: name, cohort: cohort}
+			update_student_array(name, cohort)
 			if @students.count == 1
 				puts"Now we have #{@students.count} student"
 			else
@@ -28,6 +20,10 @@ def input_students
       # get another name from the user
       name = STDIN.gets.strip
     end
+	end
+
+	def update_student_array(student, month)
+		@students << {name: student, cohort: month}
 	end
 	
 	def interactive_menu
@@ -67,15 +63,17 @@ end
 		file = File.open("students.csv", "r")
 		file.readlines.each do |line|
 		name, cohort = line.chomp.split(',')
-			@students << {name: name, cohort: cohort.to_sym}
+			update_student_array(name, cohort.to_sym)
 		end
 		file.close
 	end
 
 	def try_load_students
 		filename = ARGV.first
-		return if filename.nil?
-		if File.exists?(filename)
+		if filename.nil?
+			puts "Loaded students.csv"
+			load_students
+		elsif File.exists?(filename)
 			load_students(filename)
 			puts "Loaded #{@students.count} from #{filename}"
 		else
