@@ -4,27 +4,27 @@ def input_students
     # create an empty array
     students = []
     # get the first name
-    name = gets.chomp
+    name = gets.strip
     # while the name is not empty, repeat this code
     while !name.empty? do
 			# add the student hash to the array
 			puts "Please enter their cohort:"
-			cohort = gets.chomp
+			cohort = gets.strip
 			# get the user to confirm the name and cohort values
 			puts "is name: '#{name}' & cohort: '#{cohort}' correct? (y/n)"
-			confirm = gets.chomp
+			confirm = gets.strip
 			if confirm == "n"
 				puts "Please re-enter their name:"
-				name = gets.chomp
+				name = gets.strip
 				puts "Please re-enter their cohort:"
-				cohort = gets.chomp
+				cohort = gets.strip
 			end
       puts "Please enter their hobbies:"
-      hobbies = gets.chomp
+      hobbies = gets.strip
       puts "Please enter their country of birth:"
-      birth_country = gets.chomp
+      birth_country = gets.strip
       puts "Please enter their height:"
-      height = gets.chomp
+      height = gets.strip
 			students << {name: name, cohort: cohort, hobbies: hobbies, country: birth_country, height: height}
 			if students.count == 1
 				puts"Now we have #{students.count} student"
@@ -32,7 +32,7 @@ def input_students
 				puts "Now we have #{students.count} students"
 			end
       # get another name from the user
-      name = gets.chomp
+      name = gets.strip
     end
     # return the array of students
     students
