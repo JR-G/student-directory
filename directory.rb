@@ -24,14 +24,14 @@ def input_students
   end
   
   def print_header
-    puts "The students of Villains Academy"
-    puts "-------------"
+    puts "The students of Villains Academy".center(50)
+    puts "-------------".center(50)
   end
   
   def print(students)
     count = 0
     while count < students.count
-        puts "#{count+1}. #{students[count][:name]} (#{students[count][:cohort]} cohort). Their country of birth is: #{students[count][:country]} and their hobbies include: #{students[count][:hobbies]}. They are #{students[count][:height]} tall."
+				puts "#{count+1}. #{students[count][:name]} (#{students[count][:cohort]} cohort). Their country of birth is: #{students[count][:country]} and their hobbies include: #{students[count][:hobbies]}. They are #{students[count][:height]} tall."
         count += 1
     end
   end
@@ -53,7 +53,7 @@ def input_students
   end
  
   def print_footer(students)
-    puts "Overall, we have #{students.count} great students"
+    puts "\n","Overall, we have #{students.count} great students".center(40)
   end
   
   students = input_students
