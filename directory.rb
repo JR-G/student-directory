@@ -43,7 +43,10 @@ def input_students
     puts "-------------".center(50)
   end
   
-  def print(students)
+	def print(students)
+		if students.count == 0
+			puts "...There are no students"
+		end
     count = 0
     while count < students.count
 				puts "#{count+1}. #{students[count][:name]} (#{students[count][:cohort]} cohort). Their country of birth is: #{students[count][:country]} and their hobbies include: #{students[count][:hobbies]}. They are #{students[count][:height]} tall."
@@ -80,6 +83,8 @@ def input_students
 	def print_footer(students)
 		if students.count == 1
 			puts "\n","Overall, we have #{students.count} great student".center(40)
+		elsif students.count == 0
+			puts ""
 		else
 			puts "\n","Overall, we have #{students.count} great students".center(40)
 		end
@@ -87,8 +92,8 @@ def input_students
   
   students = input_students
   print_header
-	# print(students)
-	cohort_print(students)
+	print(students)
+	# cohort_print(students)
 #   print_specific_letter(students)
 #   print_short_names(students)
   print_footer(students)
