@@ -1,22 +1,23 @@
 @students = []
+
 def input_students
     puts "Please enter the names of the students"
     puts "To finish, just hit return twice"
     # get the first name
-    name = gets.strip
+    name = STDIN.gets.strip
     # while the name is not empty, repeat this code
     while !name.empty? do
 			# add the student hash to the array
 			puts "Please enter their cohort:"
-			cohort = gets.strip
+			cohort = STDIN.gets.strip
 			# get the user to confirm the name and cohort values
 			puts "is name: '#{name}' & cohort: '#{cohort}' correct? (y/n)"
-			confirm = gets.strip
+			confirm = STDIN.gets.strip
 			if confirm == "n"
 				puts "Please re-enter their name:"
-				name = gets.strip
+				name = STDIN.gets.strip
 				puts "Please re-enter their cohort:"
-				cohort = gets.strip
+				cohort = STDIN.gets.strip
 			end
 			@students << {name: name, cohort: cohort}
 			if @students.count == 1
@@ -25,14 +26,14 @@ def input_students
 				puts "Now we have #{@students.count} students"
 			end
       # get another name from the user
-      name = gets.strip
+      name = STDIN.gets.strip
     end
 	end
 	
 	def interactive_menu
 		loop do
 			print_menu
-			process(gets.chomp)
+			process(STDIN.gets.chomp)
 	end
 end
 
@@ -62,13 +63,25 @@ end
 		file.close
 	end
 
-	def load_students
+	def load_students(filename = "students.csv")
 		file = File.open("students.csv", "r")
 		file.readlines.each do |line|
 		name, cohort = line.chomp.split(',')
 			@students << {name: name, cohort: cohort.to_sym}
 		end
 		file.close
+	end
+
+	def try_load_students
+		filename = ARGV.first
+		return if filename.nil?
+		if File.exists?(filename)
+			load_students(filename)
+			puts "Loaded #{@students.count} from #{filename}"
+		else
+			puts "Sorry, #{filename} doesn't exist."
+			exit
+		end
 	end
 
 	def process(selection)
@@ -112,4 +125,5 @@ end
 		end
 	end
 
+try_load_students
 interactive_menu
