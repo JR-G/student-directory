@@ -10,6 +10,7 @@ def input_students
 			# add the student hash to the array
 			puts "Please enter their cohort:"
 			cohort = gets.chomp
+			# get the user to confirm the name and cohort values
 			puts "is name: '#{name}' & cohort: '#{cohort}' correct? (y/n)"
 			confirm = gets.chomp
 			if confirm == "n"
@@ -43,8 +44,18 @@ def input_students
     while count < students.count
 				puts "#{count+1}. #{students[count][:name]} (#{students[count][:cohort]} cohort). Their country of birth is: #{students[count][:country]} and their hobbies include: #{students[count][:hobbies]}. They are #{students[count][:height]} tall."
         count += 1
-    end
-  end
+		end
+	end
+	
+	def cohort_print(students)
+		cohort_list = students.map {|student| student[:cohort]}.uniq
+
+		cohort_list.each do |month|
+			students.each_with_index do |student, index|
+				puts "#{index+1}. #{student[:name]} (#{student[:cohort]} cohort). Their country of birth is: #{student[:country]} and their hobbies include: #{student[:hobbies]}. They are #{student[:height]} tall." if student[:cohort] == month
+			end
+		end
+	end
 
   def print_specific_letter(students, letter='a')
     students.each_with_index do |student,index|
@@ -68,7 +79,8 @@ def input_students
   
   students = input_students
   print_header
-  print(students)
+	# print(students)
+	cohort_print(students)
 #   print_specific_letter(students)
 #   print_short_names(students)
   print_footer(students)
