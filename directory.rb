@@ -7,14 +7,24 @@ def input_students
     name = gets.chomp
     # while the name is not empty, repeat this code
     while !name.empty? do
-      # add the student hash to the array
-      puts "Please enter their hobbies?"
+			# add the student hash to the array
+			puts "Please enter their cohort:"
+			cohort = gets.chomp
+			puts "is name: '#{name}' & cohort: '#{cohort}' correct? (y/n)"
+			confirm = gets.chomp
+			if confirm == "n"
+				puts "Please re-enter their name:"
+				name = gets.chomp
+				puts "Please re-enter their cohort:"
+				cohort = gets.chomp
+			end
+      puts "Please enter their hobbies:"
       hobbies = gets.chomp
-      puts "Please enter their country of birth"
+      puts "Please enter their country of birth:"
       birth_country = gets.chomp
-      puts "Please enter their height"
+      puts "Please enter their height:"
       height = gets.chomp
-      students << {name: name, cohort: :november, hobbies: hobbies, country: birth_country, height: height}
+      students << {name: name, cohort: cohort, hobbies: hobbies, country: birth_country, height: height}
       puts "Now we have #{students.count} students"
       # get another name from the user
       name = gets.chomp
