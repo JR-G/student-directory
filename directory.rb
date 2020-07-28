@@ -25,8 +25,12 @@ def input_students
       birth_country = gets.chomp
       puts "Please enter their height:"
       height = gets.chomp
-      students << {name: name, cohort: cohort, hobbies: hobbies, country: birth_country, height: height}
-      puts "Now we have #{students.count} students"
+			students << {name: name, cohort: cohort, hobbies: hobbies, country: birth_country, height: height}
+			if students.count == 1
+				puts"Now we have #{students.count} student"
+			else
+				puts "Now we have #{students.count} students"
+			end
       # get another name from the user
       name = gets.chomp
     end
@@ -73,8 +77,12 @@ def input_students
     end 
   end
  
-  def print_footer(students)
-    puts "\n","Overall, we have #{students.count} great students".center(40)
+	def print_footer(students)
+		if students.count == 1
+			puts "\n","Overall, we have #{students.count} great student".center(40)
+		else
+			puts "\n","Overall, we have #{students.count} great students".center(40)
+		end
   end
   
   students = input_students
