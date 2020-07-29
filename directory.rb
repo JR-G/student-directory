@@ -1,8 +1,8 @@
 @students = []
 
 def input_students
-    puts "Please enter the names of the students"
-    puts "To finish, just hit return twice"
+    puts "Please enter the name of the student:"
+    puts "(To exit, just hit return twice)"
     # get the first name
     name = STDIN.gets.strip
     # while the name is not empty, repeat this code
@@ -12,11 +12,12 @@ def input_students
 			cohort = STDIN.gets.strip
 			# get the user to confirm the name and cohort values
 			update_student_array(name, cohort)
-			if @students.count == 1
-				puts"Now we have #{@students.count} student"
-			else
-				puts "Now we have #{@students.count} students"
-			end
+			# if @students.count == 1
+			# 	puts"Now we have #{@students.count} student"
+			# else
+			# 	puts "Now we have #{@students.count} students"
+			# end
+			puts @students.count == 1 ? "Now we have #{@students.count} student" : "Now we have #{@students.count} students"
       # get another name from the user
       name = STDIN.gets.strip
     end
@@ -34,6 +35,7 @@ def input_students
 end
 
 	def print_menu
+		puts "\n", "~Student Directory Menu~".center(35), "\n"
 		puts "1. Input the students"
 		puts "2. Show the students"
 		puts "3. Save the list to students.csv"
@@ -71,7 +73,7 @@ end
 	def try_load_students
 		filename = ARGV.first
 		if filename.nil?
-			puts "Loaded students.csv"
+			puts "'students.csv' has been loaded..."
 			load_students
 		elsif File.exists?(filename)
 			load_students(filename)
@@ -99,14 +101,17 @@ end
 		end
 	end
   
-  def print_header
-    puts "The students of Villains Academy".center(50)
-    puts "-------------".center(50)
+	def print_header
+		puts "--------------------------------------------", "\n"
+    puts " 🧛‍ The Students of Villains Academy 🧛‍ ".center(43)
+		puts "-------------".center(43)
+		puts "-------".center(43)
+		puts "\n","Current Students:", "\n"
 	end
 	
 	def print_students
 		if @students.count == 0
-			puts "...There are no students"
+			puts "...There are no students at the Academy"
 		end
     @students.each_with_index do |student, index|
 				puts "#{index+1}. #{student[:name]} (#{student[:cohort]} cohort)."
@@ -115,11 +120,13 @@ end
 
 	def print_footer
 		if @students.count == 1
-			puts "\n","Overall, we have #{@students.count} great student".center(40), "\n"
+			puts "\n","\n","We have #{@students.count} great student!", "\n"
+			puts "--------------------------------------------"
 		elsif @students.count == 0
 			puts ""
 		else
-			puts "\n","Overall, we have #{@students.count} great students".center(40), "\n"
+			puts "\n","\n","Overall, we have #{@students.count} great students!", "\n"
+			puts "--------------------------------------------"
 		end
 	end
 
