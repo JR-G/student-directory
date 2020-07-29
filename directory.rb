@@ -12,11 +12,6 @@ def input_students
 			cohort = STDIN.gets.strip
 			# get the user to confirm the name and cohort values
 			update_student_array(name, cohort)
-			# if @students.count == 1
-			# 	puts"Now we have #{@students.count} student"
-			# else
-			# 	puts "Now we have #{@students.count} students"
-			# end
 			puts @students.count == 1 ? "Now we have #{@students.count} student" : "Now we have #{@students.count} students"
       # get another name from the user
       name = STDIN.gets.strip
@@ -89,12 +84,17 @@ end
 		when "1"
 			input_students
 		when "2"
+			puts "\n", "⏳ Loading Student Directory...", "\n"
 			show_students
 		when "3"
+			puts "⏳ Saving students..."
 			save_students
 		when "4"
+			puts "Students loaded from file ✅"
 			load_students
 		when "9"
+			puts "Exiting program..."
+			puts "\n", "Goodbye! 👋"
 			exit
 		else
 			puts "I don't know what you mean, try again"
