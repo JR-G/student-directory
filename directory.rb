@@ -145,6 +145,15 @@ end
 			puts "--------------------------------------------"
 		end
 	end
+	
+def read_source_code
+	puts "Would you like to print the source code? (y/n)"
+	user_input = gets.chomp
+	if user_input == "y"
+		$><<IO.read($0)
+	end
+end
 
+read_source_code
 try_load_students
 interactive_menu
