@@ -1,4 +1,5 @@
 @students = []
+@default_file = "students.csv"
 
 def input_students
     puts "Please enter the name of the student:"
@@ -33,8 +34,8 @@ end
 		puts "\n", "~Student Directory Menu~".center(35), "\n"
 		puts "1. Input the students"
 		puts "2. Show the students"
-		puts "3. Save the list to students.csv"
-		puts "4. Load the list from students.csv" 
+		puts "3. Save the student list to a file"
+		puts "4. Load the student list from a file" 
 		puts "9. Exit"
 	end
 
@@ -44,9 +45,9 @@ end
 		print_footer
 	end
 
-	def save_students
+	def save_students(filename_to_save = @default_file)
 		# open the file for writing
-		file = File.open("students.csv", "w")
+		file = File.open(filename_to_save, "w")
 		# iterate over the array of students
 		@students.each do |student|
 			student_data = [student[:name], student[:cohort]]
@@ -54,25 +55,27 @@ end
 			file.puts csv_line
 		end
 		file.close
+		puts "File saved ✅"
 	end
 
-	def load_students(filename = "students.csv")
-		file = File.open("students.csv", "r")
+	def load_students(filename_to_load = @default_file)
+		file = File.open(filename_to_load, "r")
 		file.readlines.each do |line|
 		name, cohort = line.chomp.split(',')
 			update_student_array(name, cohort.to_sym)
 		end
 		file.close
+		puts "\n", "File loaded ✅", "\n"
 	end
 
 	def try_load_students
 		filename = ARGV.first
 		if filename.nil?
-			puts "'students.csv' has been loaded..."
+			puts "\n", "'students.csv' is loading as the default file...", "\n"
 			load_students
 		elsif File.exists?(filename)
 			load_students(filename)
-			puts "Loaded #{@students.count} from #{filename}"
+			puts "Loaded #{@students.count} from #{filename} ✅"
 		else
 			puts "Sorry, #{filename} doesn't exist."
 			exit
@@ -87,11 +90,26 @@ end
 			puts "\n", "⏳ Loading Student Directory...", "\n"
 			show_students
 		when "3"
-			puts "⏳ Saving students..."
-			save_students
+			puts "Please enter the filename to save or hit return to load the default file 'students.csv':"
+			file_to_save = gets.strip
+			if file_to_save.empty?
+				puts "⏳ Saving students to #{@default_file}..."
+				save_students
+			else
+				puts "⏳ Saving students to #{file_to_save}..."
+				save_students(file_to_save)
+			end
 		when "4"
-			puts "Students loaded from file ✅"
-			load_students
+			puts "Please enter the filename to load or hit return to load the default file 'students.csv':"
+			file_to_load = gets.strip
+			p file_to_load
+			if file_to_load.empty?
+				puts "⏳ Loading students from #{@default_file}..."
+				load_students
+			else
+			puts "⏳ Loading students from #{file_to_load}..."
+			load_students(file_to_load)
+			end
 		when "9"
 			puts "Exiting program..."
 			puts "\n", "Goodbye! 👋"
